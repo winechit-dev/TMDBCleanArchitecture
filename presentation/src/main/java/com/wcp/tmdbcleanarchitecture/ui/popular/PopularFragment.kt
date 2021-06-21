@@ -1,31 +1,47 @@
 package com.wcp.tmdbcleanarchitecture.ui.popular
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.wcp.tmdbcleanarchitecture.R
+import androidx.fragment.app.viewModels
+import com.wcp.tmdbcleanarchitecture.databinding.FragmentPopularBinding
+import com.wcp.tmdbcleanarchitecture.internal.di.ViewModelFactory
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 class PopularFragment : Fragment() {
 
-    private lateinit var popularViewModel: PopularViewModel
+    private var _binding : FragmentPopularBinding? = null
+    private val binding get() = _binding!!
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    private val popularViewModel: PopularViewModel by viewModels { viewModelFactory }
+
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
-        popularViewModel =
-                ViewModelProvider(this).get(PopularViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_popular, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        popularViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    ): View {
+        _binding = FragmentPopularBinding.inflate(layoutInflater,container,false)
+       return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
