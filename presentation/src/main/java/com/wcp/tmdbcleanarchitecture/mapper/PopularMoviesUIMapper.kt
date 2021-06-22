@@ -10,7 +10,7 @@ class PopularMoviesUIMapper {
         return PopularUIModel(
             id= dataModel.id,
             poster_path = dataModel.poster_path,
-            release_date = getLocalTimeFromUnix(dataModel.release_date),
+            release_date = getLocalTimeFromUnix(dataModel.release_date?:"0000-00-00"),
             title = dataModel.title,
             vote_average = dataModel.vote_average,
             vote_count = dataModel.vote_count,

@@ -53,18 +53,18 @@ class MovieDetailsFragment : Fragment() {
 
         requireActivity()
         observeFavoriteMovieActionState()
-        viewModel.getMovieDetails(movieId).observe(viewLifecycleOwner, {state->
-            when(state){
-                is MovieDetailResult.Success ->{
+        viewModel.getMovieDetails(movieId).observe(viewLifecycleOwner, { state ->
+            when (state) {
+                is MovieDetailResult.Success -> {
                     bindDetailData(state.data)
                 }
-                is MovieDetailResult.ServerError ->{
+                is MovieDetailResult.ServerError -> {
                     Toast.makeText(context, state.toString(), Toast.LENGTH_SHORT).show()
                 }
-                is MovieDetailResult.NetworkConnectionFailure ->{
+                is MovieDetailResult.NetworkConnectionFailure -> {
                     Toast.makeText(context, "Network Connection Failed", Toast.LENGTH_SHORT).show()
                 }
-                is MovieDetailResult.FeatureFailure ->{
+                is MovieDetailResult.FeatureFailure -> {
                     Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -83,8 +83,9 @@ class MovieDetailsFragment : Fragment() {
         binding.overview.text = movieDetailDataModel.overview
         binding.orTitle.text = movieDetailDataModel.original_title
 
-        binding.orLan.text = if (movieDetailDataModel.original_language == "en") "English" else movieDetailDataModel.original_language
-        binding.txRelease.text = getLocalTimeFromUnix(movieDetailDataModel.release_date)
+        binding.orLan.text =
+            if (movieDetailDataModel.original_language == "en") "English" else movieDetailDataModel.original_language
+        binding.txRelease.text = getLocalTimeFromUnix(movieDetailDataModel.release_date ?: "0000-00-00")
 
         binding.coverPicture.loadFromUrl(IMAGE_URL + movieDetailDataModel.backdrop_path)
         binding.ivPoster.loadFromUrl(IMAGE_URL + movieDetailDataModel.poster_path)
@@ -96,15 +97,15 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun observeFavoriteMovieActionState() {
-        viewModel.favoriteMoviesUIState.observe(viewLifecycleOwner,{state->
-            when(state){
-                is FavoriteMoviesUIResult.SuccessAddFavoriteMovie->{
+        viewModel.favoriteMoviesUIState.observe(viewLifecycleOwner, { state ->
+            when (state) {
+                is FavoriteMoviesUIResult.SuccessAddFavoriteMovie -> {
                     Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
                 }
-                is FavoriteMoviesUIResult.SuccessDeleteFavoriteMovie->{
+                is FavoriteMoviesUIResult.SuccessDeleteFavoriteMovie -> {
                     Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show()
                 }
-                is FavoriteMoviesUIResult.Failure->{
+                is FavoriteMoviesUIResult.Failure -> {
                     Toast.makeText(context, "Failure!", Toast.LENGTH_SHORT).show()
                 }
             }

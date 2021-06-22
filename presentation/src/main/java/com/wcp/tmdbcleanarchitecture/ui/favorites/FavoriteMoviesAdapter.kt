@@ -15,7 +15,10 @@ class FavoriteMoviesAdapter(
     private val listener: OnClickedListener
 ) : ListAdapter<FavoriteMovieDataModel, PopularViewHolder>(
     object : DiffUtil.ItemCallback<FavoriteMovieDataModel>() {
-        override fun areItemsTheSame(oldItem: FavoriteMovieDataModel, newItem: FavoriteMovieDataModel): Boolean {
+        override fun areItemsTheSame(
+            oldItem: FavoriteMovieDataModel,
+            newItem: FavoriteMovieDataModel
+        ): Boolean {
             return oldItem.id == newItem.id
         }
 
@@ -44,12 +47,15 @@ class FavoriteMoviesAdapter(
 }
 
 class PopularViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(favoriteMovieDataModel: FavoriteMovieDataModel, listener: FavoriteMoviesAdapter.OnClickedListener) {
+    fun bind(
+        favoriteMovieDataModel: FavoriteMovieDataModel,
+        listener: FavoriteMoviesAdapter.OnClickedListener
+    ) {
 
         val url = "https://image.tmdb.org/t/p/w500/" + favoriteMovieDataModel.poster_path
         itemView.iv_poster.loadFromUrl(url)
         itemView.tv_title.text = favoriteMovieDataModel.title
-        itemView.tv_date.text = favoriteMovieDataModel.release_date
+        itemView.tv_date.text = favoriteMovieDataModel.release_date ?: "0000-00-00"
 
         itemView.setOnClickListener {
             listener.onPosterClicked(favoriteMovieDataModel)
