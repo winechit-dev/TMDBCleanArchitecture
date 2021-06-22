@@ -9,17 +9,70 @@
       android:id="@+id/navigation_upcoming"
       android:name="com.wcp.tmdbcleanarchitecture.ui.upcoming.UpcomingFragment"
       android:label="@string/title_upcoming"
-      tools:layout="@layout/fragment_upcoming" />
+      tools:layout="@layout/fragment_upcoming" >
+    <argument
+        android:name="movieId"
+        app:argType="integer" />
+    <action
+        android:id="@+id/action_upcoming_movie_to_detail_movie"
+        app:destination="@id/movieDetailsFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+  </fragment>
 
   <fragment
       android:id="@+id/navigation_popular"
       android:name="com.wcp.tmdbcleanarchitecture.ui.popular.PopularFragment"
       android:label="@string/title_popular"
-      tools:layout="@layout/fragment_popular" />
+      tools:layout="@layout/fragment_popular" >
+    <action
+        android:id="@+id/action_navigation_popular_to_movieDetailsFragment"
+        app:destination="@id/movieDetailsFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+  </fragment>
 
   <fragment
       android:id="@+id/navigation_favorites"
       android:name="com.wcp.tmdbcleanarchitecture.ui.favorites.FavoritesFragment"
       android:label="@string/title_favorites"
-      tools:layout="@layout/fragment_favorites" />
+      tools:layout="@layout/fragment_favorites" >
+    <action
+        android:id="@+id/action_navigation_favorites_to_movieDetailsFragment"
+        app:destination="@id/movieDetailsFragment" />
+  </fragment>
+  <fragment
+      android:id="@+id/movieDetailsFragment"
+      android:name="com.wcp.tmdbcleanarchitecture.ui.movieDetails.MovieDetailsFragment"
+      android:label="Movie Details"
+      tools:layout="@layout/fragment_movie_details" >
+    <argument
+        android:name="movieId"
+        app:argType="integer" />
+    <action
+        android:id="@+id/action_movieDetailsFragment_to_navigation_upcoming"
+        app:destination="@id/navigation_upcoming"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+    <action
+        android:id="@+id/action_movieDetailsFragment_to_navigation_popular"
+        app:destination="@id/navigation_popular"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+    <action
+        android:id="@+id/action_movieDetailsFragment_to_navigation_favorites"
+        app:destination="@id/navigation_favorites"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+  </fragment>
 </navigation>

@@ -7,5 +7,5 @@ import com.wcp.domain.results.UpComingResult
 interface RemoteDataSource {
     suspend fun loadUpComingMovies(): UpComingResult
     suspend fun loaPopularMovies(): PopularResult
-    suspend fun loadMovieDetails(movieId: String): MovieDetailResult
+    suspend fun loadMovieDetails(movieId: Int): MovieDetailResult
 }

@@ -54,7 +54,7 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun loadMovieDetails(movieId: String): MovieDetailResult {
+    override suspend fun loadMovieDetails(movieId: Int): MovieDetailResult {
         return withContext(Dispatchers.IO) {
             if (networkHandler.isConnected) {
                 val response = try {

@@ -25,8 +25,8 @@ interface MovieService {
 
     @GET("{movie_id}")
     suspend fun loadMovieDetails(
-        @Path("movie_id") movieId : String,
+        @Path("movie_id") movieId : Int,
         @Query("api_key") apiKey : String
-    ): MoviesResponseModel<MovieDetailDataModel>?
+    ): MovieDetailDataModel?
 
 }

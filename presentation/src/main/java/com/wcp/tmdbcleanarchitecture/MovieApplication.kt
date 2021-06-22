@@ -23,6 +23,7 @@ class MovieApplication : Application(), HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
+        INSTANCE = this
         applicationComponent = DaggerApplicationComponent.builder()
             .application(this)
             .build()

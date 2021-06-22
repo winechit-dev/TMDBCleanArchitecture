@@ -27,9 +27,9 @@ abstract class ViewModelModule {
     @ViewModelKey(MovieDetailsViewModel::class)
     abstract fun bindMovieDetailsViewModel(movieDetailsViewModel: MovieDetailsViewModel): ViewModel
 
-  /*  @Binds
+    @Binds
     @IntoMap
     @ViewModelKey(FavoritesViewModel::class)
-    abstract fun bindFavoritesViewModel(favoritesViewModel: FavoritesViewModel): ViewModel*/
+    abstract fun bindFavoritesViewModel(favoritesViewModel: FavoritesViewModel): ViewModel
 
 }
