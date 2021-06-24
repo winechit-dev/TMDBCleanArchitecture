@@ -1,10 +1,7 @@
 package com.wcp.tmdbcleanarchitecture
 
 
-import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
@@ -25,74 +22,64 @@ class MainActivityTest {
 
     @Test
     fun mainActivityTest() {
-        val textView = onView(
+        onView(
             allOf(
-                withId(R.id.tv_title), withText("The Conjuring: The Devil Made Me Do It"),
-                withParent(withParent(withId(R.id.rv_upcoming_movies))),
-                isDisplayed()
-            )
-        )
-        textView.check(matches(withText("The Conjuring: The Devil Made Me Do It")))
-
-        val viewGroup = onView(
-            allOf(
+                withId(R.id.action_bar),
                 withParent(
                     allOf(
-                        withId(R.id.rv_upcoming_movies),
-                        withParent(withId(R.id.frameLayout))
+                        withId(R.id.action_bar_container),
+                        withParent(withId(R.id.decor_content_parent))
                     )
                 ),
                 isDisplayed()
             )
         )
-        viewGroup.check(matches(isDisplayed()))
 
-        val imageView = onView(
+        onView(
             allOf(
-                withId(R.id.iv_poster),
-                withParent(withParent(withId(R.id.cv_poster))),
+                withText("Upcoming"),
+                withParent(
+                    allOf(
+                        withId(R.id.action_bar),
+                        withParent(withId(R.id.action_bar_container))
+                    )
+                ),
                 isDisplayed()
             )
         )
-        imageView.check(matches(isDisplayed()))
 
-        val imageView2 = onView(
+        onView(
             allOf(
-                withId(R.id.iv_poster),
-                withParent(withParent(withId(R.id.cv_poster))),
+                withId(R.id.icon),
+                withParent(
+                    allOf(
+                        withId(R.id.navigation_upcoming), withContentDescription("Upcoming"),
+                        withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))
+                    )
+                ),
                 isDisplayed()
             )
         )
-        imageView2.check(matches(isDisplayed()))
 
-        val imageView3 = onView(
+        onView(
             allOf(
-                withId(R.id.iv_poster),
-                withParent(withParent(withId(R.id.cv_poster))),
+                withId(R.id.largeLabel), withText("Upcoming"),
+                withParent(
+                    allOf(
+                        withId(R.id.labelGroup),
+                        withParent(
+                            allOf(
+                                withId(R.id.navigation_upcoming),
+                                withContentDescription("Upcoming")
+                            )
+                        )
+                    )
+                ),
                 isDisplayed()
             )
         )
-        imageView3.check(matches(isDisplayed()))
 
-        val imageView4 = onView(
-            allOf(
-                withId(R.id.iv_poster),
-                withParent(withParent(withId(R.id.cv_poster))),
-                isDisplayed()
-            )
-        )
-        imageView4.check(doesNotExist())
-
-        val imageView5 = onView(
-            allOf(
-                withId(R.id.iv_poster),
-                withParent(withParent(withId(R.id.cv_poster))),
-                isDisplayed()
-            )
-        )
-        imageView5.check(doesNotExist())
-
-        val imageView6 = onView(
+        onView(
             allOf(
                 withId(R.id.icon),
                 withParent(
@@ -104,20 +91,72 @@ class MainActivityTest {
                 isDisplayed()
             )
         )
-        imageView6.check(matches(isDisplayed()))
 
-        val imageView7 = onView(
+        onView(
+            allOf(
+                withId(R.id.smallLabel), withText("Popular"),
+                withParent(
+                    allOf(
+                        withId(R.id.labelGroup),
+                        withParent(
+                            allOf(
+                                withId(R.id.navigation_popular),
+                                withContentDescription("Popular")
+                            )
+                        )
+                    )
+                ),
+                isDisplayed()
+            )
+        )
+
+        onView(
             allOf(
                 withId(R.id.icon),
                 withParent(
                     allOf(
-                        withId(R.id.navigation_popular), withContentDescription("Popular"),
+                        withId(R.id.navigation_favorites), withContentDescription("Favorites"),
                         withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))
                     )
                 ),
                 isDisplayed()
             )
         )
-        imageView7.check(matches(isDisplayed()))
+
+        onView(
+            allOf(
+                withId(R.id.smallLabel), withText("Favorites"),
+                withParent(
+                    allOf(
+                        withId(R.id.labelGroup),
+                        withParent(
+                            allOf(
+                                withId(R.id.navigation_favorites),
+                                withContentDescription("Favorites")
+                            )
+                        )
+                    )
+                ),
+                isDisplayed()
+            )
+        )
+
+        onView(
+            allOf(
+                withId(R.id.smallLabel), withText("Favorites"),
+                withParent(
+                    allOf(
+                        withId(R.id.labelGroup),
+                        withParent(
+                            allOf(
+                                withId(R.id.navigation_favorites),
+                                withContentDescription("Favorites")
+                            )
+                        )
+                    )
+                ),
+                isDisplayed()
+            )
+        )
     }
 }
